@@ -12,7 +12,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 // Import JWT Interceptor
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 import { AppComponent } from './app.component';
 
@@ -23,6 +24,10 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+
+import { AuthGuard } from './_guards/auth.guard';
+import { AuthenticationService } from './_services/authentication.service';
+import { UserService } from './_services/user.service';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -43,6 +48,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -56,7 +62,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -71,7 +79,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     useClass: HashLocationStrategy
   },
   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+  AuthGuard,
+  AuthenticationService,
+  UserService,
   ],
   bootstrap: [ AppComponent ]
 })

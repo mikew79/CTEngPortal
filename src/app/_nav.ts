@@ -9,6 +9,30 @@ export const navItems = [
     }
   },
   {
+    title:true,
+    name:'Projects'
+  },
+    {
+      name:'My Projects',
+      url: '/projects',
+      icon: 'icon-folder-alt'
+    },
+    {
+      name:'All Projects',
+      url: '/projects',
+      icon: 'icon-folder'
+    },
+    {
+      name:'OEM Projects',
+      url: '/projects',
+      icon: 'icon-folder'
+    },
+    {
+      name:'Dist/SI Projects',
+      url: '/projects',
+      icon: 'icon-folder'
+    },
+  {
     title: true,
     name: 'Theme'
   },

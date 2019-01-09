@@ -9,12 +9,12 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
-import { AuthGuard } from './_guards';
+import { AuthGuard } from './_guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login', //was dashboard
+    redirectTo: 'dashboard', //was dashboard
     pathMatch: 'full',
   },
   {
@@ -46,7 +46,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'home',
+    path: '',
     component: DefaultLayoutComponent,
     canActivate: [AuthGuard],
     data: {
@@ -55,35 +55,48 @@ export const routes: Routes = [
     children: [
       {
         path: 'base',
+        canActivate: [AuthGuard],
         loadChildren: './views/base/base.module#BaseModule'
       },
       {
         path: 'buttons',
+        canActivate: [AuthGuard],
         loadChildren: './views/buttons/buttons.module#ButtonsModule'
       },
       {
         path: 'charts',
+        canActivate: [AuthGuard],
         loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
       },
       {
         path: 'dashboard',
+        canActivate: [AuthGuard],
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'icons',
+        canActivate: [AuthGuard],
         loadChildren: './views/icons/icons.module#IconsModule'
       },
       {
         path: 'notifications',
+        canActivate: [AuthGuard],
         loadChildren: './views/notifications/notifications.module#NotificationsModule'
       },
       {
         path: 'theme',
+        canActivate: [AuthGuard],
         loadChildren: './views/theme/theme.module#ThemeModule'
       },
       {
         path: 'widgets',
+        canActivate: [AuthGuard],
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
+      },
+      {
+        path: 'projects',
+        canActivate: [AuthGuard],
+        loadChildren:'./views/projects/projects.module#ProjectsModule'
       }
     ]
   }

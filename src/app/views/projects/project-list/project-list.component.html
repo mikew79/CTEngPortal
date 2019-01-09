@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-header">
+      <span class="h4"><i class="fa fa-folder-o"></i></span><span class="h5"> &nbsp; Project Backlog</span>
+    </div>
+    <div class="card-body">
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add New Project</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Customer</span>
+                </div>
+                <input type="text" class="form-control is-invalid" id="inputCustomer">
+                <div class="invalid-feedback">
+                    A Customer Name is Required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Account Owner</span>
+                </div>
+                <select class="form-control" id="accountOwner">
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Project</span>
+                  </div>
+                  <input type="text" class="form-control is-invalid" id="inputProject">
+                  <div class="invalid-feedback">
+                    A Project Name is Required
+                  </div>
+                </div>
+              </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">TAM &nbsp; <strong>£k</strong></span>
+                </div>
+                <input type="number" class="form-control is-invalid" id="inputTAM">
+                <div class="invalid-feedback">
+                  A TAM Value is Required
+                </div>
+                
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Project TAM &nbsp; <strong>£k</strong></span>
+                </div>
+                <input type="number" class="form-control is-invalid" id="inputProjectTAM">
+                <div class="invalid-feedback">
+                  A Project TAM Value is Required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Summary</span>
+              </div>
+              <textarea id="textarea-Summary" name="textarea-Summary" rows="9" class="form-control" placeholder="Content.."></textarea>
+            </div>    
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Save</button>
+        </div>
+      </ng-template>
+      <button type="button" class="btn btn-primary" (click)="open(content)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;New Project...</button>
+      <br>
+      <br>
+      <table class="table table-responsive-sm table-hover table-outline mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-center"><i class="icon-people"></i></th>
+            <th>Owner</th>
+            <th>Customer</th>
+            <th>Project</th>
+            <th class="text-center">TAM (£k)</th>
+            <th class="text-center">Project TAM (£k)</th>
+            <th class="text-center"><i class="icon-people"></i></th>
+            <th>Engineer</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr app-project-list-item *ngFor="let item of list"></tr>
+        </tbody>
+      </table>
+      <br>
+      <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+  </div>
